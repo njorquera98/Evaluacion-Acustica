@@ -5,7 +5,7 @@ import serial.tools.list_ports
 import threading
 import time
 from datetime import datetime
-import openpyxl  # Librería para trabajar con Excel
+import openpyxl  # Librería para trabajar con Excel ola
 import math  # Para cálculos estadísticos
 
 # Variables globales
