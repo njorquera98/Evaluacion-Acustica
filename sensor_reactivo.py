@@ -9,7 +9,7 @@ import openpyxl  # Librería para trabajar con Excel
 import math  # Para cálculos estadísticos
 
 # Variables globales
-ser = None            # Conexión del sensor (COM12 )
+ser = None            # Conexión del sensor (COM12 online)
 arduino = None        # Conexión del Arduino (COM8)
 running = False
 continuous_mode = False
