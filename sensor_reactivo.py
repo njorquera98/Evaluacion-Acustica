@@ -9,8 +9,8 @@ import openpyxl  # Librería para trabajar con Excel ola
 import math  # Para cálculos estadísticos
 
 # Variables globales
-ser = None            # Conexión del sensor (COM12 online)
-arduino = None        # Conexión del Arduino (COM8)
+ser = None            # Conexión del sensor (COM7 online)
+arduino = None        # Conexión del Arduino (COM3)
 running = False
 continuous_mode = False
 workbook = None
@@ -22,7 +22,7 @@ measurement_interval = 3  # Intervalo de tiempo entre mediciones en segundos
 
 def connect_serial():
     global ser, running
-    port = port_var.get()  # Se usará el puerto del sensor (COM12)
+    port = port_var.get()  # Se usará el puerto del sensor (COM7)
     baud_rate = int(baud_var.get())
     data_bits = int(data_bits_var.get())
     parity = parity_var.get()
@@ -46,13 +46,13 @@ def connect_serial():
         messagebox.showerror("Error de conexión", f"No se pudo conectar al sensor: {e}")
 
 def connect_arduino():
-    """Conecta al Arduino en COM8."""
+    """Conecta al Arduino en COM3."""
     global arduino
     try:
-        arduino = serial.Serial("COM8", 9600, timeout=1)
-        print("Arduino conectado en COM8.")
+        arduino = serial.Serial("COM3", 9600, timeout=1)
+        print("Arduino conectado en COM3.")
     except Exception as e:
-        print("Error al conectar Arduino en COM8:", e)
+        print("Error al conectar Arduino en COM3:", e)
 
 def continuous_send():
     global continuous_mode
@@ -88,7 +88,7 @@ def read_data():
                     terminal_display.insert(tk.END, f"[{timestamp}] Ruido en dB: {multiplied_value:.2f}\n")
                     terminal_display.see(tk.END)
                     save_to_excel(timestamp, multiplied_value)
-                    # Enviar el valor al Arduino (COM8)
+                    # Enviar el valor al Arduino (COM3)
                     try:
                         if arduino and arduino.is_open:
                             # Se envía como entero seguido de salto de línea
@@ -252,7 +252,7 @@ ttk.Label(root, text="Terminal de Lectura:").grid(row=11, column=0, columnspan=2
 terminal_display = scrolledtext.ScrolledText(root, width=50, height=10, state='normal')
 terminal_display.grid(row=12, column=0, columnspan=2, padx=10, pady=5)
 
-# Conectar al Arduino en COM8 al iniciar la aplicación
+# Conectar al Arduino en COM3 al iniciar la aplicación
 connect_arduino()
 
 root.mainloop()
